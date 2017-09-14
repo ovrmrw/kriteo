@@ -7,6 +7,7 @@ if (value) {
         redirect_url = redirect_url + (location.search ? '&' : '?') + referrer;
     }
     location.href = redirect_url + (redirect_url.indexOf('?') > -1 ? '&' : '?') + 'id=' + value;
+} else {
+    var randomValue = Math.random().toString(36).slice(-8);
+    localStorage.setItem(key, randomValue);    
 }
-var randomValue = Math.random().toString(36).slice(-8);
-localStorage.setItem(key, randomValue);
