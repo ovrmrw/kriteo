@@ -1,7 +1,8 @@
 var key = "___hoge___";
+var url = "https://ovrmrw.github.io/my-first-react-typescript/";
 var value = localStorage.getItem(key);
 if (value) {
-    var redirect_url = "http://qiita.com" + location.search;
+    var redirect_url = url + location.search;
     if (document.referrer) {
         var referrer = "referrer=" + encodeURIComponent(document.referrer);
         redirect_url = redirect_url + (location.search ? '&' : '?') + referrer;
