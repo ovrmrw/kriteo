@@ -1,0 +1,24 @@
+{
+  "name": "kriteo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "kriteo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy:f": "firebase deploy",
+    "deploy:g": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ovrmrw/kriteo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/ovrmrw/kriteo/issues"
+  },
+  "homepage": "https://github.com/ovrmrw/kriteo#readme",
+  "devDependencies": {
+    "gh-pages": "^1.0.0"
+  }
+}
