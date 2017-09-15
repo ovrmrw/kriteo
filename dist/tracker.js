@@ -8,7 +8,9 @@ if (viewItemId) {
     localStorage.setItem(itemIdKey, viewItemId);
     console.log('あなたがたった今閲覧した商品は ' + viewItemId + ' です。');
 } else {
-    console.log('あなたが最後に閲覧した商品は ' + localStorage.getItem(itemIdKey) + ' です。');
+    var message = 'あなたが最後に閲覧した商品は ' + localStorage.getItem(itemIdKey) + ' です。';
+    console.log(message);
+    alert(message);
 }
 
 var userId = localStorage.getItem(userIdKey);
