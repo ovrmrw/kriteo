@@ -1,5 +1,5 @@
 var key = "id";
-var redirectUrlBase = "https://friendlychat-ng4.firebaseapp.com/";
+var redirectUrlBase = "https://easy-ng-universal.firebaseapp.com/";
 
 var value = localStorage.getItem(key);
 if (value) {
