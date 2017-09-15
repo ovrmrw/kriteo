@@ -27,8 +27,7 @@ if (userId) {
 
 
 function getViewItemId() {
-    var pathname = location.pathname;
-    console.log(location.pathname, document.referrer)
+    var pathname = '/' + document.referrer.split('/').reverse()[0];
     if (pathname.startsWith('/p1')) {
         return 'p1';
     } else if (pathname.startsWith('/p2')) {
