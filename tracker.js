@@ -1,10 +1,14 @@
 var userIdKey = "userId";
 var itemIdKey = "itemId";
 var redirectUrlBase = "https://easy-ng-universal.firebaseapp.com/";
+var redirectTimeout = 3000;
 
 var viewItemId = getViewItemId();
 if (viewItemId) {
     localStorage.setItem(itemIdKey, viewItemId);
+    console.log('あなたがたった今閲覧した商品は ' + viewItemId + ' です。');
+} else {
+    console.log('あなたが最後に閲覧した商品は ' + localStorage.getItem(itemIdKey) + ' です。');
 }
 
 var userId = localStorage.getItem(userIdKey);
@@ -15,9 +19,9 @@ if (userId) {
         redirectUrl = redirectUrl + (location.search ? '&' : '?') + referrer;
     }
     var finalRedirectUrl = redirectUrl + (redirectUrl.indexOf('?') > -1 ? '&' : '?') + 'userId=' + userId;
-    console.log('Redirect after 3 seconds');
+    console.log(redirectTimeout / 1000 + '秒後にリダイレクトします。');
     setTimeout(() => {
-        console.log('Redirect to ' + finalRedirectUrl);
+        console.log('リダイレクトしました。 ' + finalRedirectUrl);
         location.replace(finalRedirectUrl);
     }, 3000);
 } else {
