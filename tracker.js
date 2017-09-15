@@ -8,7 +8,9 @@ if (value) {
         var referrer = "ref=" + encodeURIComponent(document.referrer);
         redirectUrl = redirectUrl + (location.search ? '&' : '?') + referrer;
     }
-    location.href = redirectUrl + (redirectUrl.indexOf('?') > -1 ? '&' : '?') + 'id=' + value;
+    var finalRedirectUrl = redirectUrl + (redirectUrl.indexOf('?') > -1 ? '&' : '?') + 'id=' + value;
+    console.log('Redirect to ' + finalRedirectUrl);
+    location.href = finalRedirectUrl;
 } else {
     var id = Math.floor(99999999999 * Math.random());
     localStorage.setItem(key, id);
