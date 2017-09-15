@@ -10,7 +10,7 @@ if (viewItemId) {
 } else {
     var message = 'あなたが最後に閲覧した商品は ' + localStorage.getItem(itemIdKey) + ' です。';
     console.log(message);
-    alert(messge);
+    alert(message);
 }
 
 var userId = localStorage.getItem(userIdKey);
