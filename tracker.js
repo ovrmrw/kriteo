@@ -12,7 +12,7 @@ if (value) {
     console.log('Redirect after 3 seconds');
     setTimeout(() => {
         console.log('Redirect to ' + finalRedirectUrl);
-        location.href = finalRedirectUrl;
+        location.replace(finalRedirectUrl);
     }, 3000);
 } else {
     var id = Math.floor(99999999999 * Math.random());
