@@ -27,6 +27,7 @@ window.addEventListener('message', function (event) {
     // console.log('location.href', href);
     var data = event.data;
     var script = document.createElement('script');
+    script.type = 'text/javascript';
     script.innerText = data;
     document.body.appendChild(script);
   }
