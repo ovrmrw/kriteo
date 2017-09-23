@@ -25,12 +25,10 @@ window.addEventListener('message', function (event) {
     appendDexieJS();
     var timer = setInterval(function () {
       if (!isDexieLoaded) { return; }
-      var data = event.data;
       var script = document.createElement('script');
       script.type = 'text/javascript';
       script.async = 'true';
-      // script.innerHTML = data;
-      script.src = event.data;
+      script.innerHTML = event.data;
       document.body.appendChild(script);
       clearInterval(timer);
     }, 10);
