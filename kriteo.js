@@ -20,12 +20,14 @@ window.addEventListener('message', function (event) {
   console.log('event on host:', event);
   if (event.origin === externalHost) {
     appendDexieJS();
-    var data = event.data;
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.innerHTML = data;
-    script.async = true;
-    document.body.appendChild(script);
+    setTimeout(function () {
+      var data = event.data;
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.async = 'true';
+      script.innerHTML = data;
+      document.body.appendChild(script);
+    });
   }
 }, false);
 
