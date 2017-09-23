@@ -28,7 +28,7 @@ window.addEventListener('message', function (event) {
     var data = event.data;
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.innerText = data;
+    script.innerHTML = data;
     document.body.appendChild(script);
   }
 }, false);
