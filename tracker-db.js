@@ -8,6 +8,15 @@ var itemIdKey = "itemId";
 var redirectUrlBase = "https://easy-ng-universal.firebaseapp.com/";
 var redirectTimeout = 3000;
 
+window.addEventListener('message', function (event) {
+  console.log('event on kriteo:', event);
+  Promise
+    .all([getUserId(), getItemId()])
+    .then(function (ids) {
+      event.source.postMessage(JSON.stringify(ids), event.origin);
+    })
+}, false);
+
 function main() {
   Promise.resolve()
     .then(() => {
