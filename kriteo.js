@@ -43,7 +43,6 @@ function appendDexieJS() {
   var script = document.createElement('script');
   script.id = dexieScriptId;
   script.type = 'text/javascript';
-  script.async = 'true';
   script.onload = function () {
     isDexieLoaded = true;
   };
