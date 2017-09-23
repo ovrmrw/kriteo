@@ -42,7 +42,7 @@ function main() {
         console.log(redirectTimeout / 1000 + '秒後にリダイレクトします。');
         setTimeout(() => {
           console.log('リダイレクトしました。 ' + finalRedirectUrl);
-          if (location.host !== trackerHost) {
+          if (location.host === trackerHost) {
             location.replace(finalRedirectUrl);
           }
         }, 3000);
@@ -60,7 +60,7 @@ main();
 
 
 function getViewItemId() {
-  var pathname = location.host !== trackerHost
+  var pathname = location.host === trackerHost
     ? '/' + document.referrer.split('/').reverse()[0]
     : location.pathname;
   if (pathname.startsWith('/p1')) {
