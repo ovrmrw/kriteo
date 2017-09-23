@@ -15,7 +15,7 @@ window.addEventListener('message', function (event) {
   console.log('event on host:', event);
 }, false);
 
-setTimeout(function () {
+window.onload = function () {
   var w = document.querySelector('#' + id).contentWindow;
   w.postMessage(location.href, externalHost);
-});
+};
