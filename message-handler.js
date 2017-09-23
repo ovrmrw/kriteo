@@ -1,21 +1,26 @@
-fetch('tracker-db.js')
-  .then(function (response) {
-    return response.text();
-  })
-  .then(function (text) {
-    console.log(text);
-  })
-  .catch(function (err) {
-    console.error(err);
-  });
-
 window.addEventListener('message', function (event) {
-  if (event.data === 'script' || event.data === 'indexeddb') {
-    event.source.postMessage(scriptIndexedDB, event.origin);
-  } else if (event.data === 'localstrogae') {
-    event.source.postMessage(scriptLocalStroage, event.origin);
+  if (event.data) {
+    getScript(event.data)
+      .then(function (script) {
+        event.source.postMessage(script, event.origin);
+      })
   }
 }, false);
+
+
+function getScript(type) {
+  var file = type === 'localstroage'
+    ? 'tracker.js'
+    : 'tracker-db.js';
+  return fetch(file)
+    .then(function (response) {
+      return response.text();
+    })
+    .catch(function (err) {
+      console.error(err);
+      return '';
+    });
+}
 
 
 var scriptIndexedDB = `
