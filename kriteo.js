@@ -19,16 +19,20 @@ window.onload = function () {
 window.addEventListener('message', function (event) {
   console.log('event on host:', event);
   if (event.origin === externalHost) {
-    // var userId = JSON.parse(event.data)[0];
-    // var itemId = JSON.parse(event.data)[1];
-    // var href = JSON.parse(event.data)[2];
-    // console.log('userId', userId);
-    // console.log('itemId', itemId);
-    // console.log('location.href', href);
+    appendDexieJS();
     var data = event.data;
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.innerHTML = data;
+    script.async = true;
     document.body.appendChild(script);
   }
 }, false);
+
+
+function appendDexieJS() {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = 'https://unpkg.com/dexie@2.0.0/dist/dexie.min.js';
+  document.body.appendChild(script);
+}
