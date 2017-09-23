@@ -13,6 +13,10 @@ window.addEventListener('message', function (event) {
   Promise
     .all([getUserId(), getItemId()])
     .then(function (ids) {
+      ids.push(event.data);
+      return ids;
+    })
+    .then(function (ids) {
       event.source.postMessage(JSON.stringify(ids), event.origin);
     })
 }, false);
