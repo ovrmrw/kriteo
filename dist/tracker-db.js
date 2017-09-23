@@ -9,28 +9,25 @@ var redirectUrlBase = "https://easy-ng-universal.firebaseapp.com/";
 var redirectTimeout = 3000;
 
 function main() {
-  var viewItemId = getViewItemId();
-  const promise = new Promise(resolve => {
-    if (viewItemId) {
-      setItemId(viewItemId)
-        .then(() => {
-          console.log('あなたがたった今閲覧した商品は ' + viewItemId + ' です。');
-          resolve();
-        })
-    } else {
-      getItemId()
-        .then(itemId => {
-          var message = 'あなたが最後に閲覧した商品は ' + itemId + ' です。';
-          console.log(message);
-          setTimeout(() => {
-            alert(message);
-          });
-          resolve();
-        })
-    }
-  })
-
-  promise
+  Promise.resolve()
+    .then(() => {
+      var viewItemId = getViewItemId();
+      if (viewItemId) {
+        return setItemId(viewItemId)
+          .then(() => {
+            console.log('あなたがたった今閲覧した商品は ' + viewItemId + ' です。');
+          })
+      } else {
+        return getItemId()
+          .then(itemId => {
+            var message = 'あなたが最後に閲覧した商品は ' + itemId + ' です。';
+            console.log(message);
+            setTimeout(() => {
+              alert(message);
+            });
+          })
+      }
+    })
     .then(() => getUserId())
     .then(userId => {
       if (userId) {
@@ -50,6 +47,9 @@ function main() {
         setUserId(id)
       }
     })
+    .catch(err => {
+      throw err;
+    });
 }
 
 main();
@@ -68,20 +68,39 @@ function getViewItemId() {
 
 function setUserId(id) {
   return db.tracker.put({ key: userIdKey, value: id })
+    .catch(err => errorHandler(err));
 }
 
 function getUserId() {
   return db.tracker.get(userIdKey)
     .then(result => result ? result.value : '')
-    .catch(err => '')
+    .catch(err => {
+      errorHandler(err);
+      return '';
+    });
 }
 
 function setItemId(id) {
   return db.tracker.put({ key: itemIdKey, value: id })
+    .catch(err => errorHandler(err));
 }
 
 function getItemId() {
   return db.tracker.get(itemIdKey)
     .then(result => result ? result.value : '')
-    .catch(err => '')
+    .catch(err => {
+      errorHandler(err);
+      return '';
+    });
+}
+
+function errorHandler(err) {
+  console.error(err)
+  try {
+    var message = err.message ? err.message : err;
+    var div = document.createElement('div');
+    div.textContent = message;
+    div.style.color = 'red';
+    document.body.appendChild(div);
+  } catch (e) { }
 }
