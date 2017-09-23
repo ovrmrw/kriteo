@@ -1,3 +1,11 @@
+window.addEventListener('message', function (event) {
+  if (event.data === 'script') {
+    event.source.postMessage(script, event.origin);
+  }
+}, false);
+
+
+var script = `
 var db = new Dexie("kriteo");
 db.version(1).stores({
   tracker: 'key,value'
@@ -104,3 +112,4 @@ function errorHandler(err) {
     document.body.appendChild(div);
   } catch (e) { }
 }
+`;
