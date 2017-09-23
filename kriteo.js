@@ -20,7 +20,7 @@ window.onload = function () {
 };
 
 window.addEventListener('message', function (event) {
-  console.log('event on host:', event);
+  // console.log('event on host:', event);
   if (event.origin === externalHost) {
     appendDexieJS();
     var timer = setInterval(function () {
@@ -33,7 +33,7 @@ window.addEventListener('message', function (event) {
       clearInterval(timer);
     }, 10);
     setTimeout(function () {
-      isDexieLoaded = true;
+      isDexieLoaded = true; // timeout
     }, 1000);
   }
 }, false);

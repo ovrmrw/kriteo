@@ -1,3 +1,14 @@
+fetch('tracker-db.js')
+  .then(function (response) {
+    return response.text();
+  })
+  .then(function (text) {
+    console.log(text);
+  })
+  .catch(function (err) {
+    console.error(err);
+  });
+
 window.addEventListener('message', function (event) {
   if (event.data === 'script' || event.data === 'indexeddb') {
     event.source.postMessage(scriptIndexedDB, event.origin);
