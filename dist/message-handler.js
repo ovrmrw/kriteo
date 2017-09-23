@@ -51,7 +51,7 @@ function main() {
           // location.replace(finalRedirectUrl);
         }, 3000);
       } else {
-        var id = Math.floor(99999999999 * Math.random());
+        var id = '' + Math.floor(99999999999 * Math.random());
         setUserId(id)
       }
     })
@@ -145,7 +145,7 @@ if (userId) {
         // location.replace(finalRedirectUrl);
     }, 3000);
 } else {
-    var id = Math.floor(99999999999 * Math.random());
+    var id = '' + Math.floor(99999999999 * Math.random());
     localStorage.setItem(userIdKey, id);
 }
 
