@@ -9,28 +9,25 @@ var redirectUrlBase = "https://easy-ng-universal.firebaseapp.com/";
 var redirectTimeout = 3000;
 
 function main() {
-  var viewItemId = getViewItemId();
-  const promise = new Promise(resolve => {
-    if (viewItemId) {
-      setItemId(viewItemId)
-        .then(() => {
-          console.log('あなたがたった今閲覧した商品は ' + viewItemId + ' です。');
-          resolve();
-        })
-    } else {
-      getItemId()
-        .then(itemId => {
-          var message = 'あなたが最後に閲覧した商品は ' + itemId + ' です。';
-          console.log(message);
-          setTimeout(() => {
-            alert(message);
-          });
-          resolve();
-        })
-    }
-  })
-
-  promise
+  Promise.resolve()
+    .then(() => {
+      var viewItemId = getViewItemId();
+      if (viewItemId) {
+        return setItemId(viewItemId)
+          .then(() => {
+            console.log('あなたがたった今閲覧した商品は ' + viewItemId + ' です。');
+          })
+      } else {
+        return getItemId()
+          .then(itemId => {
+            var message = 'あなたが最後に閲覧した商品は ' + itemId + ' です。';
+            console.log(message);
+            setTimeout(() => {
+              alert(message);
+            });
+          })
+      }
+    })
     .then(() => getUserId())
     .then(userId => {
       if (userId) {
@@ -50,6 +47,9 @@ function main() {
         setUserId(id)
       }
     })
+    .catch(err => {
+      throw err;
+    });
 }
 
 main();
