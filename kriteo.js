@@ -1,5 +1,5 @@
 var kriteoFrameId = 'dynamic-kriteo-frame';
-var dexiejsId = 'dynamic-dexiejs';
+var dexieScriptId = 'dynamic-dexiejs';
 var externalHost = 'https://ovrmrw.github.io'
 
 var isDexieLoaded = false;
@@ -34,14 +34,18 @@ window.addEventListener('message', function (event) {
       document.body.appendChild(script);
       clearInterval(timer);
     }, 10);
+    setTimeout(function () {
+      isDexieLoaded = true;
+    }, 1000);
   }
 }, false);
 
 
 function appendDexieJS() {
   var script = document.createElement('script');
-  script.id = dexiejsId;
+  script.id = dexieScriptId;
   script.type = 'text/javascript';
+  script.async = 'true';
   script.onload = function () {
     isDexieLoaded = true;
   };
