@@ -68,20 +68,28 @@ function getViewItemId() {
 
 function setUserId(id) {
   return db.tracker.put({ key: userIdKey, value: id })
+    .catch(err => console.error(err));
 }
 
 function getUserId() {
   return db.tracker.get(userIdKey)
     .then(result => result ? result.value : '')
-    .catch(err => '')
+    .catch(err => {
+      console.error(err);
+      return '';
+    });
 }
 
 function setItemId(id) {
   return db.tracker.put({ key: itemIdKey, value: id })
+    .catch(err => console.error(err));
 }
 
 function getItemId() {
   return db.tracker.get(itemIdKey)
     .then(result => result ? result.value : '')
-    .catch(err => '')
+    .catch(err => {
+      console.error(err);
+      return '';
+    });
 }
