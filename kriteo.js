@@ -13,17 +13,21 @@ document.body.appendChild(iframe);
 
 window.onload = function () {
   var w = document.querySelector('#' + id).contentWindow;
-  w.postMessage(location.href, externalHost);
+  w.postMessage('script', externalHost);
 };
 
 window.addEventListener('message', function (event) {
   console.log('event on host:', event);
   if (event.origin === externalHost) {
-    var userId = JSON.parse(event.data)[0];
-    var itemId = JSON.parse(event.data)[1];
-    var href = JSON.parse(event.data)[2];
-    console.log('userId', userId);
-    console.log('itemId', itemId);
-    console.log('location.href', href);
+    // var userId = JSON.parse(event.data)[0];
+    // var itemId = JSON.parse(event.data)[1];
+    // var href = JSON.parse(event.data)[2];
+    // console.log('userId', userId);
+    // console.log('itemId', itemId);
+    // console.log('location.href', href);
+    var data = event.data;
+    var script = document.createElement('script');
+    script.innerText = data;
+    document.body.appendChild(script);
   }
 }, false);
