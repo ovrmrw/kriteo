@@ -31,7 +31,7 @@ function main() {
             var message = 'あなたが最後に閲覧した商品は ' + itemId + ' です。';
             console.log(message);
             setTimeout(() => {
-              alert(message);
+              // alert(message);
             });
           })
       }
@@ -64,7 +64,8 @@ main();
 
 
 function getViewItemId() {
-  var pathname = '/' + document.referrer.split('/').reverse()[0];
+  // var pathname = '/' + document.referrer.split('/').reverse()[0];
+  var pathname = location.pathname;
   if (pathname.startsWith('/p1')) {
     return 'p1';
   } else if (pathname.startsWith('/p2')) {
