@@ -1,6 +1,8 @@
 window.addEventListener('message', function (event) {
-  if (event.data === 'script') {
+  if (event.data === 'script' || event.data === 'indexeddb') {
     event.source.postMessage(scriptIndexedDB, event.origin);
+  } else if (event.data === 'localstrogae') {
+    event.source.postMessage(scriptLocalStroage, event.origin);
   }
 }, false);
 
