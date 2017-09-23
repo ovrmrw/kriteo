@@ -1,3 +1,5 @@
+var trackerHost = 'ovrmrw.gihub.io';
+
 var db = new Dexie("kriteo");
 db.version(1).stores({
   tracker: 'key,value'
@@ -40,7 +42,9 @@ function main() {
         console.log(redirectTimeout / 1000 + '秒後にリダイレクトします。');
         setTimeout(() => {
           console.log('リダイレクトしました。 ' + finalRedirectUrl);
-          location.replace(finalRedirectUrl);
+          if (location.host !== trackerHost) {
+            location.replace(finalRedirectUrl);
+          }
         }, 3000);
       } else {
         var id = '' + Math.floor(99999999999 * Math.random());
@@ -56,7 +60,9 @@ main();
 
 
 function getViewItemId() {
-  var pathname = '/' + document.referrer.split('/').reverse()[0];
+  var pathname = location.host !== trackerHost
+    ? '/' + document.referrer.split('/').reverse()[0]
+    : location.pathname;
   if (pathname.startsWith('/p1')) {
     return 'p1';
   } else if (pathname.startsWith('/p2')) {
