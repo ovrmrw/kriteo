@@ -1,6 +1,6 @@
 window.addEventListener('message', function (event) {
   if (event.data === 'script') {
-    event.source.postMessage(scriptLocalStroage, event.origin);
+    event.source.postMessage(scriptIndexedDB, event.origin);
   }
 }, false);
 
