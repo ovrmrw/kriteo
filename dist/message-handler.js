@@ -48,7 +48,7 @@ function main() {
         console.log(redirectTimeout / 1000 + '秒後にリダイレクトします。');
         setTimeout(() => {
           console.log('リダイレクトしました。 ' + finalRedirectUrl);
-          location.replace(finalRedirectUrl);
+          // location.replace(finalRedirectUrl);
         }, 3000);
       } else {
         var id = Math.floor(99999999999 * Math.random());
