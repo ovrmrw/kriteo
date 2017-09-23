@@ -68,28 +68,37 @@ function getViewItemId() {
 
 function setUserId(id) {
   return db.tracker.put({ key: userIdKey, value: id })
-    .catch(err => console.error(err));
+    .catch(err => errorHandler(err));
 }
 
 function getUserId() {
   return db.tracker.get(userIdKey)
     .then(result => result ? result.value : '')
     .catch(err => {
-      console.error(err);
+      errorHandler(err);
       return '';
     });
 }
 
 function setItemId(id) {
   return db.tracker.put({ key: itemIdKey, value: id })
-    .catch(err => console.error(err));
+    .catch(err => errorHandler(err));
 }
 
 function getItemId() {
   return db.tracker.get(itemIdKey)
     .then(result => result ? result.value : '')
     .catch(err => {
-      console.error(err);
+      errorHandler(err);
       return '';
     });
+}
+
+function errorHandler(err) {
+  console.error(err)
+  var message = err.message ? err.message : err;
+  var div = document.createElement('div');
+  div.textContent = message;
+  div.style.color = 'red';
+  document.body.appendChild(div);
 }
