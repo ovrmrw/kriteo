@@ -25,15 +25,13 @@ window.addEventListener('message', function (event) {
     appendDexieJS();
     var timer = setInterval(function () {
       if (!isDexieLoaded) { return; }
-      // var dexiejsScript = document.getElementById(dexiejsId);
-      // dexiejsScript.onload = function () {
       var data = event.data;
       var script = document.createElement('script');
       script.type = 'text/javascript';
       script.async = 'true';
-      script.innerHTML = data;
+      // script.innerHTML = data;
+      script.src = event.data;
       document.body.appendChild(script);
-      // }
       clearInterval(timer);
     }, 10);
   }
