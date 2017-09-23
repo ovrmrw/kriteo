@@ -96,9 +96,11 @@ function getItemId() {
 
 function errorHandler(err) {
   console.error(err)
-  var message = err.message ? err.message : err;
-  var div = document.createElement('div');
-  div.textContent = message;
-  div.style.color = 'red';
-  document.body.appendChild(div);
+  try {
+    var message = err.message ? err.message : err;
+    var div = document.createElement('div');
+    div.textContent = message;
+    div.style.color = 'red';
+    document.body.appendChild(div);
+  } catch (e) { }
 }
