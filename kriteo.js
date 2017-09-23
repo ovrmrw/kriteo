@@ -11,11 +11,19 @@ iframe.src = externalHost + '/kriteo/';
 
 document.body.appendChild(iframe);
 
-window.addEventListener('message', function (event) {
-  console.log('event on host:', event);
-}, false);
-
 window.onload = function () {
   var w = document.querySelector('#' + id).contentWindow;
   w.postMessage(location.href, externalHost);
 };
+
+window.addEventListener('message', function (event) {
+  console.log('event on host:', event);
+  if (event.origin === externalHost) {
+    var userId = JSON.parse(event.data)[0];
+    var itemId = JSON.parse(event.data)[1];
+    var href = JSON.parse(event.data)[2];
+    console.log('userId', userId);
+    console.log('itemId', itemId);
+    console.log('location.href', href);
+  }
+}, false);
