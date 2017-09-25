@@ -1,5 +1,5 @@
 window.addEventListener('message', function (event) {
-  if (event.data) {
+  if (event.data !== 'cookie') {
     getScript(event.data)
       .then(function (script) {
         event.source.postMessage(script, event.origin);

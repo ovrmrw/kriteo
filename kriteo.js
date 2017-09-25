@@ -39,6 +39,14 @@ window.addEventListener('message', function (event) {
   }
 }, false);
 
+window.addEventListener('message', function (event) {
+  if (event.origin === externalHost) {
+    if (event.data.startsWith('cookie:')) {
+      console.log(event.data);
+    }
+  }
+}, false);
+
 
 function appendDexieJS() {
   var script = document.createElement('script');
