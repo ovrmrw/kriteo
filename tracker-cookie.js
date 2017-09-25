@@ -47,5 +47,6 @@ function domain() {
 }
 
 function encode(value) {
-  return encodeURIComponent(value);
+  // return encodeURIComponent(value);
+  return value;
 }
