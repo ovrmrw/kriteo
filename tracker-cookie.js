@@ -16,7 +16,7 @@ if (str) {
     // maxAge(),
     expires(),
     // path(),
-    // domain(),
+    domain(),
     // 'secure'
   ];
   var cookie = values.join(';') + ';';
