@@ -13,11 +13,11 @@ if (str) {
   var id = '' + Math.floor(99999999999 * Math.random());
   var values = [
     key + '=' + id,
-    // maxAge(),
-    expires(),
+    maxAge(),
+    // expires(),
     // path(),
     domain(),
-    // 'secure'
+    'secure'
   ];
   var cookie = values.join(';') + ';';
   console.log('cookie:', cookie);
