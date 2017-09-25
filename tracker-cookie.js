@@ -27,8 +27,8 @@ if (str) {
 
 window.addEventListener('message', function (event) {
   if (event.data === 'cookie') {
-    document.cookie = 'x=hoge; domain=' + event.origin;
-    event.source.postMessage(document.cookie, event.origin);
+    document.cookie = 'x=hoge; domain=' + location.host;
+    event.source.postMessage('cookie:' + document.cookie, event.origin);
   }
 }, false);
 
