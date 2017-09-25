@@ -14,12 +14,12 @@ if (str) {
   var values = [
     key + '=' + id,
     // maxAge(),
-    // expires(),
+    expires(),
     // path(),
     // domain(),
     // 'secure'
   ];
-  var cookie = values.join('; ');
+  var cookie = values.join(';') + ';';
   console.log('cookie:', cookie);
   document.cookie = cookie;
   console.log('3rd party Cookieを新しくセットしました。 id:', id);
