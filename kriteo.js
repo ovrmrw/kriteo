@@ -17,6 +17,7 @@ document.body.appendChild(iframe);
 window.onload = function () {
   var w = document.getElementById(kriteoFrameId).contentWindow;
   w.postMessage('indexeddb', externalHost);
+  w.postMessage('cookie', externalHost);
 };
 
 window.addEventListener('message', function (event) {
