@@ -50,8 +50,7 @@ function path() {
 
 function domain() {
   var value = location.host;
-  // return 'domain=' + encode(value);
-  return 'domain=github.io';
+  return 'domain=' + encode(value);
 }
 
 function encode(value) {
