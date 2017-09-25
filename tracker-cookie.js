@@ -6,7 +6,7 @@ var str = document.cookie.split(';')
 
 if (str) {
   var value = str.split('=')[1];
-  var message = '3rd party Cookieの読み取りに成功しました。 id:', value;
+  var message = '3rd party Cookieの読み取りに成功しました。 id:' + value;
   console.log(message);
   alert(message);
 } else {
