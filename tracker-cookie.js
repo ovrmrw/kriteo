@@ -25,6 +25,13 @@ if (str) {
   console.log('3rd party Cookieを新しくセットしました。 id:', id);
 }
 
+window.addEventListener('message', function (event) {
+  if (event.data === 'cookie') {
+    document.cookie = 'x=hoge; domain=' + event.origin;
+    event.source.postMessage(document.cookie, event.origin);
+  }
+}, false);
+
 
 function maxAge() {
   var value = 60 * 60 * 24 * 365 * 2;
