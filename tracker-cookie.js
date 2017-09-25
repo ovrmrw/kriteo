@@ -15,9 +15,9 @@ if (str) {
     key + '=' + id,
     // maxAge(),
     expires(),
-    path(),
-    domain(),
-    // 'secure'
+    // path(),
+    // domain(),
+    'secure'
   ];
   var cookie = values.join('; ');
   console.log('cookie:', cookie);
