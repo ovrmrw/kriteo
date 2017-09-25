@@ -17,7 +17,7 @@ if (str) {
     expires(),
     path(),
     domain(),
-    'secure'
+    // 'secure'
   ];
   var cookie = values.join('; ');
   console.log('cookie:', cookie);
