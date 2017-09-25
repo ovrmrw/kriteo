@@ -14,7 +14,7 @@ if (str) {
   var values = [
     key + '=' + id,
     // maxAge(),
-    expires(),
+    // expires(),
     // path(),
     // domain(),
     // 'secure'
