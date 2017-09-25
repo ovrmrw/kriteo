@@ -11,7 +11,7 @@ if (str) {
   var id = '' + Math.floor(99999999999 * Math.random());
   var values = [
     key + '=' + id,
-    maxAge(),
+    // maxAge(),
     expires(),
     path(),
     domain(),
