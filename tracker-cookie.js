@@ -16,7 +16,7 @@ if (str) {
     path(),
     domain(),
   ];
-  document.cookie = values.join(';');
+  document.cookie = values.join('; ');
   console.log('3rd party Cookieを新しくセットしました。 id:', id);
 }
 
