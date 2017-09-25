@@ -15,7 +15,7 @@ if (str) {
     key + '=' + id,
     maxAge(),
     // expires(),
-    // path(),
+    path(),
     domain(),
     'secure'
   ];
