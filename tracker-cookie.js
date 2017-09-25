@@ -25,12 +25,12 @@ if (str) {
   console.log('3rd party Cookieを新しくセットしました。 id:', id);
 }
 
-window.addEventListener('message', function (event) {
-  if (event.data === 'cookie') {
-    document.cookie = 'x=hoge; domain=' + location.host;
-    event.source.postMessage('cookie:' + document.cookie, event.origin);
-  }
-}, false);
+// window.addEventListener('message', function (event) {
+//   if (event.data === 'cookie') {
+//     document.cookie = 'x=hoge; domain=' + location.host;
+//     event.source.postMessage('cookie:' + document.cookie, event.origin);
+//   }
+// }, false);
 
 
 function maxAge() {
