@@ -15,6 +15,7 @@ if (str) {
     expires(),
     path(),
     domain(),
+    'Secure'
   ];
   document.cookie = values.join('; ');
   console.log('3rd party Cookieを新しくセットしました。 id:', id);
