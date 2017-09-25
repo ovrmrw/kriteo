@@ -23,20 +23,24 @@ if (str) {
 
 function maxAge() {
   var value = 60 * 60 * 24 * 365 * 2;
-  return 'max-age=' + value;
+  return 'max-age=' + encode(value);
 }
 
 function expires() {
   var value = 'Tue, 19 Jan 2038 03:14:07 GMT';
-  return 'expires=' + value;
+  return 'expires=' + encode(value);
 }
 
 function path() {
   var value = '/';
-  return 'path=' + value;
+  return 'path=' + encode(value);
 }
 
 function domain() {
   var value = location.host;
-  return 'domain=' + value;
+  return 'domain=' + encode(value);
+}
+
+function encode(value) {
+  return encodeURIComponent(value);
 }
