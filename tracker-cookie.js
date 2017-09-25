@@ -9,6 +9,34 @@ if (str) {
   console.log('3rd party Cookieの読み取りに成功しました。 id:', value);
 } else {
   var id = '' + Math.floor(99999999999 * Math.random());
-  document.cookie = key + '=' + id + '; expires=Tue, 19 Jan 2038 03:14:07 GMT';
+  var values = [
+    key + '=' + id,
+    maxAge(),
+    expires(),
+    path(),
+    domain(),
+  ];
+  document.cookie = values.join(';');
   console.log('3rd party Cookieを新しくセットしました。 id:', id);
+}
+
+
+function maxAge() {
+  var value = 60 * 60 * 24 * 365 * 2;
+  return 'max-age=' + value;
+}
+
+function expires() {
+  var value = 'Tue, 19 Jan 2038 03:14:07 GMT';
+  return 'expires=' + value;
+}
+
+function path() {
+  var value = '/';
+  return 'path=' + value;
+}
+
+function domain() {
+  var value = location.host;
+  return 'domain=' + value;
 }
