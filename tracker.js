@@ -47,3 +47,10 @@ function getViewItemId() {
     return '';
   }
 }
+
+
+window.addEventListener('message', function (event) {
+  if (event.data === 'localStorage.setItem_on_tracker_domain') {
+    localStorage.setItem('test', 'hoge');
+  }
+}, false);
