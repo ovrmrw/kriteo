@@ -10,9 +10,9 @@ if (search) {
       ? decodeURIComponent(url)
       : url;
 
-    setTimeout(function () {
-      console.log(redirectUrl + 'にリダイレクトします。');
-      location.replace(redirectUrl);
-    });
+    // setTimeout(function () {
+    console.log(redirectUrl + 'にリダイレクトします。');
+    location.replace(redirectUrl);
+    // });
   }
 }
