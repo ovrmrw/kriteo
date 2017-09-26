@@ -6,10 +6,10 @@ var isDexieLoaded = false;
 
 var iframe = document.createElement('iframe');
 iframe.id = kriteoFrameId;
-iframe.width = 100;
-iframe.height = 100;
-// iframe.style.display = 'none';
-// iframe.style.visibility = 'hidden';
+iframe.width = 0;
+iframe.height = 0;
+iframe.style.display = 'none';
+iframe.style.visibility = 'hidden';
 iframe.src = externalHost + '/kriteo/';
 
 document.body.appendChild(iframe);

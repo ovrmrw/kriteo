@@ -13,6 +13,6 @@ if (search) {
     setTimeout(function () {
       console.log(redirectUrl + 'にリダイレクトします。');
       location.replace(redirectUrl);
-    }, 1000);
+    });
   }
 }
