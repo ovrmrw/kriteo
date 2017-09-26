@@ -51,6 +51,7 @@ function getViewItemId() {
 
 window.addEventListener('message', function (event) {
   if (event.data === 'localStorage.setItem_on_tracker_domain') {
+    console.log('kriteoドメインのlocalStorageにmessageイベント経由で書き込み');
     localStorage.setItem('test', 'hoge');
   }
 }, false);
