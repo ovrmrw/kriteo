@@ -36,10 +36,11 @@ if (userId) {
 
 
 function getViewItemId() {
+
   var pathname = location.host === trackerHost
     ? '/' + document.referrer.split('/').reverse()[0]
     : location.pathname;
-  console.log('pathname:', pathname);
+  console.log('pathname:', pathname, location.host, trackerHost);
   if (pathname.startsWith('/p1')) {
     return 'p1';
   } else if (pathname.startsWith('/p2')) {
