@@ -6,7 +6,7 @@ if (search) {
 
   if (redirectParam) {
     var url = redirectParam.split('=')[1];
-    var redirectUrl = url.indexOf('%') > -1
+    var redirectUrl = url.indexOf('%2F') > -1 // %2F =(decode)=> /
       ? decodeURIComponent(url)
       : url;
 
