@@ -51,7 +51,14 @@ function getViewItemId() {
 
 window.addEventListener('message', function (event) {
   if (event.data === 'localStorage.setItem_on_tracker_domain') {
-    console.log('kriteoドメインのlocalStorageにmessageイベント経由で書き込み');
-    localStorage.setItem('test', 'hoge');
+    if (!localStorage.getItem('test')) {
+      var id = '' + Math.floor(99999999999 * Math.random());
+      console.log('kriteoドメインのlocalStorageにmessageイベント経由で書き込み', id)
+      localStorage.setItem('test', id);
+    } else {
+      var message = 'kriteoドメインのlocalStorageにはtestキーが存在します。' + localStorage.getItem('test');
+      console.log(message);
+      alert(message);
+    }
   }
 }, false);
