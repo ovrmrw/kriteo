@@ -39,6 +39,7 @@ function getViewItemId() {
   var pathname = location.host === trackerHost
     ? '/' + document.referrer.split('/').reverse()[0]
     : location.pathname;
+  console.log('pathname:', pathname);
   if (pathname.startsWith('/p1')) {
     return 'p1';
   } else if (pathname.startsWith('/p2')) {
