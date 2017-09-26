@@ -1,5 +1,6 @@
 var userIdKey = "userId";
 var itemIdKey = "itemId";
+var trackerHost = 'ovrmrw.gihub.io';
 var redirectUrlBase = "https://easy-ng-universal.firebaseapp.com/";
 var redirectTimeout = 3000;
 
