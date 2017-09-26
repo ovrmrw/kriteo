@@ -1,5 +1,6 @@
 var userIdKey = "userId";
 var itemIdKey = "itemId";
+var trackerHost = 'ovrmrw.github.io';
 var redirectUrlBase = "https://easy-ng-universal.firebaseapp.com/";
 var redirectTimeout = 3000;
 
@@ -46,3 +47,10 @@ function getViewItemId() {
     return '';
   }
 }
+
+
+window.addEventListener('message', function (event) {
+  if (event.data === 'localStorage.setItem_on_tracker_domain') {
+    localStorage.setItem('test', 'hoge');
+  }
+}, false);

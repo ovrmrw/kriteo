@@ -1,4 +1,4 @@
-var trackerHost = 'ovrmrw.gihub.io';
+var trackerHost = 'ovrmrw.github.io';
 
 var db = new Dexie("kriteo");
 db.version(1).stores({

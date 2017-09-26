@@ -1,4 +1,6 @@
 var key = 'kriteoId';
+var trackerHost = 'ovrmrw.github.io';
+
 
 var str = document.cookie.split(';')
   .map(str => str.trim())
@@ -56,4 +58,45 @@ function domain() {
 function encode(value) {
   // return encodeURIComponent(value);
   return value;
+}
+
+
+
+var viewItemId = getViewItemId();
+if (viewItemId) {
+  // localStorage.setItem(itemIdKey, viewItemId);
+  var values = [
+    'itemId=' + viewItemId,
+    maxAge(),
+    // expires(),
+    path(),
+    domain(),
+    'secure'
+  ];
+  var cookie = values.join(';') + ';';
+  document.cookie = cookie;
+  console.log('あなたがたった今閲覧した商品は ' + viewItemId + ' です。');
+} else {
+  var itemIdCookie = document.cookie.split(';')
+    .map(c => c.trim())
+    .find(c => c.indexOf('itemId=') > -1);
+  var itemId = itemIdCookie
+    ? itemIdCookie.split('=')[1]
+    : '';
+  var message = 'あなたが最後に閲覧した商品は ' + itemId + ' です。';
+  console.log(message);
+  alert(message);
+}
+
+function getViewItemId() {
+  var pathname = location.host === trackerHost
+    ? '/' + document.referrer.split('/').reverse()[0]
+    : location.pathname;
+  if (pathname.startsWith('/p1')) {
+    return 'p1';
+  } else if (pathname.startsWith('/p2')) {
+    return 'p2';
+  } else {
+    return '';
+  }
 }

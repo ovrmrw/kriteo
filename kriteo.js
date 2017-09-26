@@ -18,6 +18,7 @@ window.onload = function () {
   var w = document.getElementById(kriteoFrameId).contentWindow;
   w.postMessage('indexeddb', externalHost);
   w.postMessage('cookie', externalHost);
+  w.postMessage('localStorage.setItem_on_tracker_domain', externalHost);
 };
 
 window.addEventListener('message', function (event) {
