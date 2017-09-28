@@ -21,7 +21,7 @@ if (str) {
     domain(),
     'secure'
   ];
-  var cookie = values.join(';') + ';';
+  var cookie = values.join('; ');
   console.log('cookie:', cookie);
   document.cookie = cookie;
   console.log('3rd party Cookieを新しくセットしました。 id:', id);
@@ -52,7 +52,7 @@ function path() {
 
 function domain() {
   var value = location.host;
-  value = '.github.io';
+  value = 'github.io';
   return 'domain=' + encode(value);
 }
 
