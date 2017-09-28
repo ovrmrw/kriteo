@@ -4,6 +4,8 @@ var trackerHost = 'ovrmrw.github.io';
 var redirectUrlBase = "https://easy-ng-universal.firebaseapp.com/";
 var redirectTimeout = 3000;
 
+console.log(arguments);
+
 var viewItemId = getViewItemId();
 if (viewItemId) {
   localStorage.setItem(itemIdKey, viewItemId);
