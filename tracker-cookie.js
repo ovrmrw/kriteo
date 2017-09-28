@@ -52,6 +52,7 @@ function path() {
 
 function domain() {
   var value = location.host;
+  value = '.github.io';
   return 'domain=' + encode(value);
 }
 
