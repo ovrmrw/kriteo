@@ -23,9 +23,10 @@ if (!window._apdCrossDomainKey) {
             ? cookie.split('=')[1]
             : '';
 
-    window.addEventListener('DOMContentLoaded', function () {
-        setEventListners();
-    });
+    // window.addEventListener('DOMContentLoaded', function () {
+    //     setEventListners();
+    // });
+    setEventListners();
 
     function setEventListners() {
         eventNames.forEach(eventName => {
