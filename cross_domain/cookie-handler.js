@@ -8,10 +8,12 @@ if (!window._adpCrossDomainKey) {
     var cookie = document.cookie.split(';')
         .map(s => s.trim())
         .find(s => s.indexOf('=') > -1 && s.split('=')[0] === adpKey);
-    var cdId = cookie ? cookie.split('=')[1] : '';
+    var cdId = cookie
+        ? cookie.split('=')[1]
+        : '';
 
     if (!cdId) {
-        var newCdId = '' + Math.floor(99999999999 * Math.random()) + '.' + Date.now();
+        var newCdId = '' + Math.floor(99999999 * Math.random()) + '.' + Date.now();
         setCookie(newCdId, '1st party Cookieを新しくセットしました。');
     } else if (getCrossDomainIdFromQueryParams(adpKey)) {
         var newCdId = getCrossDomainIdFromQueryParams(adpKey);
@@ -27,7 +29,7 @@ if (!window._adpCrossDomainKey) {
         ];
         var cookie = values.join('; ');
         document.cookie = cookie;
-        console.log(message, 'cross domain id:', crossDomainId);
+        console.log(message, 'crossDomainId:', crossDomainId, '(' + location.href + ')');
     }
 
     function maxAge() {
@@ -51,11 +53,11 @@ if (!window._adpCrossDomainKey) {
     }
 
     function getCrossDomainIdFromQueryParams(key) {
-        if (!key) {
-            return '';
-        }
+        if (!key) { return ''; }
         var params = location.search.replace('?', '').split('&');
         var cdIdParam = params.find(p => p.split('=')[0] === key);
-        return cdIdParam ? cdIdParam.split('=')[1] : '';
+        return cdIdParam
+            ? cdIdParam.split('=')[1]
+            : '';
     }
 })();
