@@ -54,7 +54,7 @@ if (!window._adpCrossDomainKey) {
     }
 
     function containsCrossDomainId(href, key) {
-        return href.indexOf('?' + key + '=') === -1 && href.indexOf('&' + key + '=') === -1;
+        return href.indexOf('?' + key + '=') > -1 || href.indexOf('&' + key + '=') > -1;
     }
 
     function createNewHref(href, key, value) {
