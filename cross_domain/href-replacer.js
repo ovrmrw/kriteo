@@ -26,7 +26,6 @@ if (!window._apdCrossDomainKey) {
     // window.addEventListener('DOMContentLoaded', function () {
     //     setEventListners();
     // });
-    setEventListners();
 
     function setEventListners() {
         eventNames.forEach(eventName => {
@@ -88,6 +87,8 @@ if (!window._apdCrossDomainKey) {
         var cdIdParam = params.find(p => p.split('=')[0] === key);
         return cdIdParam ? cdIdParam.split('=')[1] : '';
     }
+
+    setEventListners();
 })();
 
 
