@@ -11,7 +11,7 @@ if (!window._adpCrossDomainKey) {
     var cdId = cookie ? cookie.split('=')[1] : '';
 
     if (!cdId) {
-        var newCdId = '' + Math.floor(99999999999 * Math.random()) + '.' + Math.round(Date.now() / 1000);
+        var newCdId = '' + Math.floor(99999999999 * Math.random()) + '.' + Date.now();
         var values = [
             adpKey + '=' + newCdId,
             maxAge(),
