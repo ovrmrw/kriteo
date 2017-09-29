@@ -35,7 +35,7 @@ if (!window._apdCrossDomainKey) {
     }
 
     function linkUrlReplacer(event) {
-        console.log(event)
+        console.log('event:', event);
         var target = event.target.form
             ? event.target.form
             : event.target;
@@ -91,8 +91,8 @@ if (!window._apdCrossDomainKey) {
 })();
 
 
-(function () {
-    window.addEventListener('beforeunload', function (event) {
-        event.returnValue = true;
-    })
-})();
+// (function () {
+//     window.addEventListener('beforeunload', function (event) {
+//         event.returnValue = true;
+//     })
+// })();
