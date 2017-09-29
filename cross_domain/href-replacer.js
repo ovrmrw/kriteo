@@ -39,7 +39,7 @@ if (!window._adpCrossDomainKey) {
         var href = isForm
             ? target.action
             : target.href;
-        if (href && isCrossDomainTarget(href) && notContainsUid(href, adpKey)) {
+        if (href && isCrossDomainTarget(href) && !containsCrossDomainId(href, adpKey)) {
             var newHref = createNewHref(href, adpKey, cdId);
             if (isForm) {
                 target.action = newHref;
@@ -53,7 +53,7 @@ if (!window._adpCrossDomainKey) {
         return crossDomainTargets.some(target => href.indexOf(target) > -1);
     }
 
-    function notContainsUid(href, key) {
+    function containsCrossDomainId(href, key) {
         return href.indexOf('?' + key + '=') === -1 && href.indexOf('&' + key + '=') === -1;
     }
 

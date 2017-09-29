@@ -12,16 +12,22 @@ if (!window._adpCrossDomainKey) {
 
     if (!cdId) {
         var newCdId = '' + Math.floor(99999999999 * Math.random()) + '.' + Date.now();
+        setCookie(newCdId, '1st party Cookieを新しくセットしました。');
+    } else if (getCrossDomainIdFromQueryParams(adpKey)) {
+        var newCdId = getCrossDomainIdFromQueryParams(adpKey);
+        setCookie(newCdId, 'クエリパラメータで1st party Cookieを上書きしました。');
+    }
+
+    function setCookie(crossDomainId, message) {
         var values = [
-            adpKey + '=' + newCdId,
+            adpKey + '=' + crossDomainId,
             maxAge(),
             path(),
             domain(),
-            // 'secure'
         ];
         var cookie = values.join('; ');
         document.cookie = cookie;
-        console.log('1st party Cookieを新しくセットしました。 cross domain id:', newCdId);
+        console.log(message, 'cross domain id:', crossDomainId);
     }
 
     function maxAge() {
@@ -37,5 +43,19 @@ if (!window._adpCrossDomainKey) {
     function domain() {
         var value = location.host;
         return 'domain=' + value;
+    }
+
+    function containsCrossDomainId(key) {
+        var href = location.href;
+        return href.indexOf('?' + key + '=') > -1 || href.indexOf('&' + key + '=') > -1;
+    }
+
+    function getCrossDomainIdFromQueryParams(key) {
+        if (!key) {
+            return '';
+        }
+        var params = location.search.replace('?', '').split('&');
+        var cdIdParam = params.find(p => p.split('=')[0] === key);
+        return cdIdParam ? cdIdParam.split('=')[1] : '';
     }
 })();
