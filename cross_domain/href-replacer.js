@@ -28,6 +28,7 @@ if (!window._apdCrossDomainKey) {
     // });
 
     function setEventListners() {
+        console.log('setEventListners', window);
         eventNames.forEach(eventName => {
             window.addEventListener(eventName, linkUrlReplacer, false);
         });
