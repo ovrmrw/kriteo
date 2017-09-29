@@ -4,20 +4,14 @@ if (!window._adpCrossDomainKey) {
 
 (function () {
     var adpKey = window._adpCrossDomainKey;
+    var cdIdFromParams = getCrossDomainIdFromQueryParams(adpKey);
+    var cdIdFromCookie = getCrossDomainIdFromCookie(adpKey);
 
-    var cookie = document.cookie.split(';')
-        .map(s => s.trim())
-        .find(s => s.indexOf('=') > -1 && s.split('=')[0] === adpKey);
-    var cdId = cookie
-        ? cookie.split('=')[1]
-        : '';
-
-    if (!cdId) {
+    if (cdIdFromParams) {
+        setCookie(cdIdFromParams, 'クエリパラメータで1st party Cookieを上書きしました。');
+    } else if (!cdIdFromCookie) {
         var newCdId = '' + Math.floor(99999999 * Math.random()) + '.' + Date.now();
         setCookie(newCdId, '1st party Cookieを新しくセットしました。');
-    } else if (getCrossDomainIdFromQueryParams(adpKey)) {
-        var newCdId = getCrossDomainIdFromQueryParams(adpKey);
-        setCookie(newCdId, 'クエリパラメータで1st party Cookieを上書きしました。');
     }
 
     function setCookie(crossDomainId, message) {
@@ -56,8 +50,19 @@ if (!window._adpCrossDomainKey) {
         if (!key) { return ''; }
         var params = location.search.replace('?', '').split('&');
         var cdIdParam = params.find(p => p.split('=')[0] === key);
-        return cdIdParam
+        var cdId = cdIdParam
             ? cdIdParam.split('=')[1]
             : '';
+        return cdId;
+    }
+
+    function getCrossDomainIdFromCookie(key) {
+        var cookie = document.cookie.split(';')
+            .map(s => s.trim())
+            .find(s => s.indexOf('=') > -1 && s.split('=')[0] === key);
+        var cdId = cookie
+            ? cookie.split('=')[1]
+            : '';
+        return cdId;
     }
 })();
