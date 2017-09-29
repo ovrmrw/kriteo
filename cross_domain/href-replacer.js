@@ -26,14 +26,12 @@ if (!window._adpCrossDomainKey) {
     setEventListners();
 
     function setEventListners() {
-        // console.log('setEventListners', window);
         eventNames.forEach(eventName => {
             window.addEventListener(eventName, linkUrlReplacer, false);
         });
     }
 
     function linkUrlReplacer(event) {
-        // console.log('event:', event);
         var target = event.target.form
             ? event.target.form
             : event.target;
