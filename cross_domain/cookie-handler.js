@@ -1,9 +1,9 @@
-if (!window._apdCrossDomainKey) {
-    window._apdCrossDomainKey = '_adp_cd_id';
+if (!window._adpCrossDomainKey) {
+    window._adpCrossDomainKey = '_adp_cd_id';
 }
 
 (function () {
-    var adpKey = window._apdCrossDomainKey;
+    var adpKey = window._adpCrossDomainKey;
 
     var cookie = document.cookie.split(';')
         .map(s => s.trim())

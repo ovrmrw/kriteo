@@ -5,8 +5,8 @@ if (!window._adpCrossDomainTargets) {
     ];
 }
 
-if (!window._apdCrossDomainKey) {
-    window._apdCrossDomainKey = '_adp_cd_id';
+if (!window._adpCrossDomainKey) {
+    window._adpCrossDomainKey = '_adp_cd_id';
 }
 
 (function () {
@@ -23,19 +23,17 @@ if (!window._apdCrossDomainKey) {
             ? cookie.split('=')[1]
             : '';
 
-    // window.addEventListener('DOMContentLoaded', function () {
-    //     setEventListners();
-    // });
+    setEventListners();
 
     function setEventListners() {
-        console.log('setEventListners', window);
+        // console.log('setEventListners', window);
         eventNames.forEach(eventName => {
             window.addEventListener(eventName, linkUrlReplacer, false);
         });
     }
 
     function linkUrlReplacer(event) {
-        console.log('event:', event);
+        // console.log('event:', event);
         var target = event.target.form
             ? event.target.form
             : event.target;
@@ -88,8 +86,6 @@ if (!window._apdCrossDomainKey) {
         var cdIdParam = params.find(p => p.split('=')[0] === key);
         return cdIdParam ? cdIdParam.split('=')[1] : '';
     }
-
-    setEventListners();
 })();
 
 
