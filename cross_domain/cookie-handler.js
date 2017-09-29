@@ -23,7 +23,7 @@ if (!window._adpCrossDomainKey) {
         ];
         var cookie = values.join('; ');
         document.cookie = cookie;
-        console.log(message, 'crossDomainId:', crossDomainId, '(' + location.href + ')');
+        console.log(message, adpKey + '=' + crossDomainId, '(' + location.href + ')');
     }
 
     function maxAge() {
