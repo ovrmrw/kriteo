@@ -25,9 +25,9 @@ if (userId) {
   console.log(redirectTimeout / 1000 + '秒後にリダイレクトします。');
   setTimeout(() => {
     console.log('リダイレクトしました。 ' + finalRedirectUrl);
-    if (location.host === trackerHost) {
-      location.replace(finalRedirectUrl);
-    }
+    // if (location.host === trackerHost) {
+    //   location.replace(finalRedirectUrl);
+    // }
   }, 3000);
 } else {
   var id = '' + Math.floor(99999999999 * Math.random());
