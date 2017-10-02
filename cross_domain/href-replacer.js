@@ -15,7 +15,7 @@ if (!window._adpCrossDomainKey) {
     var crossDomainTargets = window._adpCrossDomainTargets;
 
     var eventNames = ['click', 'keydown', 'touchstart', 'touchend'];
-    var cdId = getCrossDomainIdFromQueryParams(adpKey) || getCrossDomainIdFromCookie(adpKey);
+    // var cdId = getCrossDomainIdFromQueryParams(adpKey) || getCrossDomainIdFromCookie(adpKey);
 
     setEventListners();
 
@@ -34,6 +34,7 @@ if (!window._adpCrossDomainKey) {
             ? target.action
             : target.href;
         if (href && isCrossDomainTarget(href) && !containsCrossDomainId(href, adpKey)) {
+            var cdId = getCrossDomainIdFromCookie(adpKey);
             var now = Math.round(Date.now() / 1000);
             var newCdId = cdId.indexOf('.') > -1
               ? cdId.split('.')[0] + '.' + now
@@ -74,17 +75,17 @@ if (!window._adpCrossDomainKey) {
         return newHref;
     }
 
-    function getCrossDomainIdFromQueryParams(key) {
-        if (!key) {
-            return '';
-        }
-        var params = location.search.replace('?', '').split('&');
-        var cdIdParam = params.find(p => p.split('=')[0] === key);
-        var cdId = cdIdParam 
-            ? cdIdParam.split('=')[1] 
-            : '';
-        return cdId;
-    }
+    // function getCrossDomainIdFromQueryParams(key) {
+    //     if (!key) {
+    //         return '';
+    //     }
+    //     var params = location.search.replace('?', '').split('&');
+    //     var cdIdParam = params.find(p => p.split('=')[0] === key);
+    //     var cdId = cdIdParam 
+    //         ? cdIdParam.split('=')[1] 
+    //         : '';
+    //     return cdId;
+    // }
 
     function getCrossDomainIdFromCookie(key) {
         var cookie = document.cookie.split(';')
