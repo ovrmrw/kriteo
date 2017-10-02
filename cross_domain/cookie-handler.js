@@ -4,13 +4,19 @@ if (!window._adpCrossDomainKey) {
 
 (function () {
     var adpKey = window._adpCrossDomainKey;
+
     var cdIdFromParams = getCrossDomainIdFromQueryParams(adpKey);
     var cdIdFromCookie = getCrossDomainIdFromCookie(adpKey);
+    
+    var now = Math.round(Date.now() / 1000);
+    var timestamp = cdIdFromParams
+        ? cdIdFromParams.split('.')[1]
+        : '';
 
-    if (cdIdFromParams) {
+    if (cdIdFromParams && timestamp && now < timestamp + 60 * 2) {
         setCookie(cdIdFromParams, 'クエリパラメータで1st party Cookieを上書きしました。');
     } else if (!cdIdFromCookie) {
-        var newCdId = '' + Math.floor(99999999 * Math.random()) + '.' + Date.now();
+        var newCdId = '' + Math.floor(99999999 * Math.random()) + '.' + now;
         setCookie(newCdId, '1st party Cookieを新しくセットしました。');
     }
 

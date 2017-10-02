@@ -13,6 +13,7 @@ if (!window._adpCrossDomainKey) {
 (function () {
     var adpKey = window._adpCrossDomainKey;
     var crossDomainTargets = window._adpCrossDomainTargets;
+    
     var eventNames = ['click', 'keydown', 'touchstart', 'touchend'];
     var cdId = getCrossDomainIdFromQueryParams(adpKey) || getCrossDomainIdFromCookie(adpKey);
 
@@ -96,5 +97,5 @@ if (!window._adpCrossDomainKey) {
 // (function () {
 //     window.addEventListener('beforeunload', function (event) {
 //         event.returnValue = true;
-//     })
+//     });
 // })();
