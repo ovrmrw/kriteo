@@ -7,11 +7,11 @@ if (!window._adpCrossDomainKey) {
 
     var cdIdFromParams = getCrossDomainIdFromQueryParams(adpKey);
     var cdIdFromCookie = getCrossDomainIdFromCookie(adpKey);
-    
+
     var now = Math.round(Date.now() / 1000);
     var timestamp = cdIdFromParams
-        ? cdIdFromParams.split('.')[1]
-        : '';
+        ? Number(cdIdFromParams.split('.')[1])
+        : 0;
 
     if (cdIdFromParams && timestamp && now < timestamp + 60 * 2) {
         setCookie(cdIdFromParams, 'クエリパラメータで1st party Cookieを上書きしました。');
