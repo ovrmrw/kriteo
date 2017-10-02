@@ -13,7 +13,7 @@ if (!window._adpCrossDomainKey) {
 (function () {
     var adpKey = window._adpCrossDomainKey;
     var crossDomainTargets = window._adpCrossDomainTargets;
-    
+
     var eventNames = ['click', 'keydown', 'touchstart', 'touchend'];
     var cdId = getCrossDomainIdFromQueryParams(adpKey) || getCrossDomainIdFromCookie(adpKey);
 
@@ -34,7 +34,11 @@ if (!window._adpCrossDomainKey) {
             ? target.action
             : target.href;
         if (href && isCrossDomainTarget(href) && !containsCrossDomainId(href, adpKey)) {
-            var newHref = createNewHref(href, adpKey, cdId);
+            var now = Math.round(Date.now() / 1000);
+            var newCdId = cdId.indexOf('.') > -1
+              ? cdId.split('.')[0] + '.' + now
+              : cdId;
+            var newHref = createNewHref(href, adpKey, newCdId);
             if (isForm) {
                 target.action = newHref;
             } else {
