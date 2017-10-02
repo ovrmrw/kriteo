@@ -2,6 +2,7 @@ if (!window._adpCrossDomainTargets) {
     window._adpCrossDomainTargets = [
         'cross-a-5b0e9.firebaseapp.com',
         'cross-b-11cf3.firebaseapp.com',
+        'cross-c-5a991.firebaseapp.com',
     ];
 }
 
