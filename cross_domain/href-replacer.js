@@ -63,8 +63,8 @@ if (!window._adpLinker) {
             var cdId = getCrossDomainIdFromCookie(adpKey);
             var now = Math.round(Date.now() / 1000);
             var newCdId = cdId.indexOf('.') > -1
-              ? cdId.split('.')[0] + '.' + now
-              : cdId;
+                ? cdId.split('.')[0] + '.' + now
+                : cdId;
             var newUrl = decorateUrl(url, adpKey, newCdId);
             return newUrl;
         } else {
@@ -124,6 +124,17 @@ if (!window._adpLinker) {
     }
 })();
 
+(function () {
+    var elements = Array.from(document.querySelectorAll('meta[http-equiv="refresh"]'));
+    elements.forEach(element => {
+        var content = element.content;
+        var values = content.split(';').map(s => s.trim());
+        var timeout = values[0];
+        var url = values[1];
+        var newUrl = window._adpLinker(url);
+        element.content = timeout + ';' + newUrl;
+    });
+})();
 
 // (function () {
 //     window.addEventListener('beforeunload', function (event) {
