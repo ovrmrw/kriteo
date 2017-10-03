@@ -1,12 +1,5 @@
-if (!window._adpCrossDomainKey) {
-    window._adpCrossDomainKey = '_adp_cd_id';
-}
-
-if (!window._adpCookieKey) {
-    window._adpCookieKey = '_adp_uid';
-}
-
 var _crossDomainTargets = 'cross-a-5b0e9.firebaseapp.com, cross-b-11cf3.firebaseapp.com, cross-c-5a991.firebaseapp.com, cross-d-423dc.firebaseapp.com';
+
 if (!window._adp) {
     window._adp = [];
 }
@@ -26,8 +19,8 @@ if (!window._adpLinker) {
 }
 
 (function () {
-    var queryKey = window._adpCrossDomainKey;
-    var cookieKey = window._adpCookieKey;
+    var queryKey = '_adp_cd_id';
+    var cookieKey = '_adp_uid';
     var crossDomainTargets = window._adp.length > 0 && window._adp[0].cd
         ? window._adp[0].cd.split(',').map(s => s.trim())
         : [];

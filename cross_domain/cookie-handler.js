@@ -1,16 +1,7 @@
-if (!window._adpCrossDomainKey) {
-    window._adpCrossDomainKey = '_adp_cd_id';
-}
-
-if (!window._adpCookieKey) {
-    window._adpCookieKey = '_adp_uid';
-}
-
-
 (function () {
-    var queryKey = window._adpCrossDomainKey;
-    var cookieKey = window._adpCookieKey;
-
+    var queryKey = '_adp_cd_id';
+    var cookieKey = '_adp_uid';
+    
     var cdIdFromParams = getCrossDomainIdFromQueryParams(queryKey);
     var userIdFromCookie = getAdpUserIdFromCookie(cookieKey);
 
