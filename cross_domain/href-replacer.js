@@ -10,6 +10,10 @@ if (!window._adpCrossDomainKey) {
     window._adpCrossDomainKey = '_adp_cd_id';
 }
 
+if (!window._adpLinker) {
+    window._adpLinker = function (url) { return url; };
+}
+
 (function () {
     var adpKey = window._adpCrossDomainKey;
     var crossDomainTargets = window._adpCrossDomainTargets;
@@ -30,23 +34,45 @@ if (!window._adpCrossDomainKey) {
             ? event.target.form
             : event.target;
         var isForm = target.tagName === 'FORM';
-        var href = isForm
+        var url = isForm
             ? target.action
             : target.href;
-        if (href && isCrossDomainTarget(href) && !containsCrossDomainId(href, adpKey)) {
+        // if (href && isCrossDomainTarget(href) && !containsCrossDomainId(href, adpKey)) {
+        //     var cdId = getCrossDomainIdFromCookie(adpKey);
+        //     var now = Math.round(Date.now() / 1000);
+        //     var newCdId = cdId.indexOf('.') > -1
+        //       ? cdId.split('.')[0] + '.' + now
+        //       : cdId;
+        //     var newHref = decorateUrl(href, adpKey, newCdId);
+        //     if (isForm) {
+        //         target.action = newHref;
+        //     } else {
+        //         target.href = newHref;
+        //     }
+        // }
+        var newUrl = getDecoratedUrl(url);
+        if (isForm) {
+            target.action = newUrl;
+        } else {
+            target.href = newUrl;
+        }
+    }
+
+    function getDecoratedUrl(url) {
+        if (url && isCrossDomainTarget(url) && !containsCrossDomainId(url, adpKey)) {
             var cdId = getCrossDomainIdFromCookie(adpKey);
             var now = Math.round(Date.now() / 1000);
             var newCdId = cdId.indexOf('.') > -1
               ? cdId.split('.')[0] + '.' + now
               : cdId;
-            var newHref = createNewHref(href, adpKey, newCdId);
-            if (isForm) {
-                target.action = newHref;
-            } else {
-                target.href = newHref;
-            }
+            var newUrl = decorateUrl(url, adpKey, newCdId);
+            return newUrl;
+        } else {
+            return url;
         }
     }
+
+    window._adpLinker = getDecoratedUrl;
 
     function isCrossDomainTarget(href) {
         return crossDomainTargets.some(target => href.indexOf(target) > -1);
@@ -56,7 +82,7 @@ if (!window._adpCrossDomainKey) {
         return href.indexOf('?' + key + '=') > -1 || href.indexOf('&' + key + '=') > -1;
     }
 
-    function createNewHref(href, key, value) {
+    function decorateUrl(href, key, value) {
         if (!value) {
             return href;
         }
