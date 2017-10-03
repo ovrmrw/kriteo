@@ -3,11 +3,13 @@ if (!window._adpCrossDomainTargets) {
         'cross-a-5b0e9.firebaseapp.com',
         'cross-b-11cf3.firebaseapp.com',
         'cross-c-5a991.firebaseapp.com',
+        'cross-d-423dc.firebaseapp.com',
     ];
 }
 
 if (!window._adpCrossDomainKey) {
     window._adpCrossDomainKey = '_adp_cd_id';
+    window._adpCookieKey = '_adp_uid';
 }
 
 if (!window._adpLinker) {
@@ -15,21 +17,21 @@ if (!window._adpLinker) {
 }
 
 (function () {
-    var adpKey = window._adpCrossDomainKey;
+    var queryKey = window._adpCrossDomainKey;
+    var cookieKey = window._adpCookieKey;
     var crossDomainTargets = window._adpCrossDomainTargets;
 
     var eventNames = ['click', 'keydown', 'touchstart', 'touchend'];
-    // var cdId = getCrossDomainIdFromQueryParams(adpKey) || getCrossDomainIdFromCookie(adpKey);
 
     setEventListners();
 
     function setEventListners() {
         eventNames.forEach(eventName => {
-            window.addEventListener(eventName, linkUrlReplacer, false);
+            window.addEventListener(eventName, linkUrlDecorator, false);
         });
     }
 
-    function linkUrlReplacer(event) {
+    function linkUrlDecorator(event) {
         var target = event.target.form
             ? event.target.form
             : event.target;
@@ -37,19 +39,6 @@ if (!window._adpLinker) {
         var url = isForm
             ? target.action
             : target.href;
-        // if (href && isCrossDomainTarget(href) && !containsCrossDomainId(href, adpKey)) {
-        //     var cdId = getCrossDomainIdFromCookie(adpKey);
-        //     var now = Math.round(Date.now() / 1000);
-        //     var newCdId = cdId.indexOf('.') > -1
-        //       ? cdId.split('.')[0] + '.' + now
-        //       : cdId;
-        //     var newHref = decorateUrl(href, adpKey, newCdId);
-        //     if (isForm) {
-        //         target.action = newHref;
-        //     } else {
-        //         target.href = newHref;
-        //     }
-        // }
         var newUrl = getDecoratedUrl(url);
         if (isForm) {
             target.action = newUrl;
@@ -59,14 +48,10 @@ if (!window._adpLinker) {
     }
 
     function getDecoratedUrl(url) {
-        if (url && isCrossDomainTarget(url) && !containsCrossDomainId(url, adpKey)) {
-            var cdId = getCrossDomainIdFromCookie(adpKey);
-            var now = Math.round(Date.now() / 1000);
-            var newCdId = cdId.indexOf('.') > -1
-                ? cdId.split('.')[0] + '.' + now
-                : cdId;
-            var newUrl = decorateUrl(url, adpKey, newCdId);
-            return newUrl;
+        if (url && isCrossDomainTarget(url) && !containsCrossDomainId(url, queryKey)) {
+            var userId = getCrossDomainIdFromCookie(cookieKey);
+            var decoratedUrl = addCrossDomainId(url, queryKey, userId);
+            return decoratedUrl;
         } else {
             return url;
         }
@@ -82,10 +67,12 @@ if (!window._adpLinker) {
         return href.indexOf('?' + key + '=') > -1 || href.indexOf('&' + key + '=') > -1;
     }
 
-    function decorateUrl(href, key, value) {
-        if (!value) {
+    function addCrossDomainId(href, key, userId) {
+        if (!userId) {
             return href;
         }
+        var now = Math.round(Date.now() / 1000);
+        var cdId = userId + '.' + now;
         var url = href.indexOf('#') > -1
             ? href.split('#')[0]
             : href;
@@ -93,34 +80,22 @@ if (!window._adpLinker) {
             ? '#' + href.split('#')[1]
             : '';
         var newUrl = url.indexOf('?') > -1
-            ? url + '&' + key + '=' + encodeURIComponent(value)
-            : url + '?' + key + '=' + encodeURIComponent(value)
+            ? url + '&' + key + '=' + encodeURIComponent(cdId)
+            : url + '?' + key + '=' + encodeURIComponent(cdId)
         var newHref = hash
             ? newUrl + hash
             : newUrl;
         return newHref;
     }
 
-    // function getCrossDomainIdFromQueryParams(key) {
-    //     if (!key) {
-    //         return '';
-    //     }
-    //     var params = location.search.replace('?', '').split('&');
-    //     var cdIdParam = params.find(p => p.split('=')[0] === key);
-    //     var cdId = cdIdParam 
-    //         ? cdIdParam.split('=')[1] 
-    //         : '';
-    //     return cdId;
-    // }
-
     function getCrossDomainIdFromCookie(key) {
         var cookie = document.cookie.split(';')
             .map(s => s.trim())
             .find(s => s.indexOf('=') > -1 && s.split('=')[0] === key);
-        var cdId = cookie
+        var userId = cookie
             ? cookie.split('=')[1]
             : '';
-        return cdId;
+        return userId;
     }
 })();
 
@@ -130,7 +105,9 @@ if (!window._adpLinker) {
         var content = element.content;
         var values = content.split(';').map(s => s.trim());
         var timeout = values[0];
-        var url = values[1];
+        var url = values.length > 1
+            ? values[1].replace(/(url=|'|")/ig, '')
+            : '';
         var newUrl = window._adpLinker(url);
         element.content = timeout + ';' + newUrl;
     });

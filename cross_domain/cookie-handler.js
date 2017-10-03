@@ -1,12 +1,14 @@
 if (!window._adpCrossDomainKey) {
     window._adpCrossDomainKey = '_adp_cd_id';
+    window._adpCookieKey = '_adp_uid';
 }
 
 (function () {
-    var adpKey = window._adpCrossDomainKey;
+    var queryKey = window._adpCrossDomainKey;
+    var cookieKey = window._adpCookieKey;
 
-    var cdIdFromParams = getCrossDomainIdFromQueryParams(adpKey);
-    var cdIdFromCookie = getCrossDomainIdFromCookie(adpKey);
+    var cdIdFromParams = getCrossDomainIdFromQueryParams(queryKey);
+    var userIdFromCookie = getAdpUserIdFromCookie(cookieKey);
 
     var now = Math.round(Date.now() / 1000);
     var timestamp = cdIdFromParams
@@ -14,22 +16,23 @@ if (!window._adpCrossDomainKey) {
         : 0;
 
     if (cdIdFromParams && timestamp && now < timestamp + 60 * 2) {
-        setCookie(cdIdFromParams, 'クエリパラメータで1st party Cookieを上書きしました。');
-    } else if (!cdIdFromCookie) {
-        var newCdId = '' + Math.floor(99999999 * Math.random()) + '.' + now;
-        setCookie(newCdId, '1st party Cookieを新しくセットしました。');
+        var userId = cdIdFromParams.split('.')[0];
+        setCookie(userId, 'クエリパラメータで1st party Cookieを上書きしました。');
+    } else if (!userIdFromCookie) {
+        var newUserId = '' + Math.floor(99999999 * Math.random());
+        setCookie(newUserId, '1st party Cookieを新しくセットしました。');
     }
 
-    function setCookie(crossDomainId, message) {
+    function setCookie(userId, message) {
         var values = [
-            adpKey + '=' + crossDomainId,
+            cookieKey + '=' + userId,
             maxAge(),
             path(),
             domain(),
         ];
         var cookie = values.join('; ');
         document.cookie = cookie;
-        console.log(message, adpKey + '=' + crossDomainId, '(' + location.href + ')');
+        console.log(message, cookieKey + '=' + userId, '(' + location.href + ')');
     }
 
     function maxAge() {
@@ -62,13 +65,13 @@ if (!window._adpCrossDomainKey) {
         return cdId;
     }
 
-    function getCrossDomainIdFromCookie(key) {
+    function getAdpUserIdFromCookie(key) {
         var cookie = document.cookie.split(';')
             .map(s => s.trim())
             .find(s => s.indexOf('=') > -1 && s.split('=')[0] === key);
-        var cdId = cookie
+        var userId = cookie
             ? cookie.split('=')[1]
             : '';
-        return cdId;
+        return userId;
     }
 })();
