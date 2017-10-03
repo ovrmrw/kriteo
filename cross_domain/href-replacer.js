@@ -1,3 +1,11 @@
+if (!window._adpCrossDomainKey) {
+    window._adpCrossDomainKey = '_adp_cd_id';
+}
+
+if (!window._adpCookieKey) {
+    window._adpCookieKey = '_adp_uid';
+}
+
 if (!window._adpCrossDomainTargets) {
     window._adpCrossDomainTargets = [
         'cross-a-5b0e9.firebaseapp.com',
@@ -5,11 +13,6 @@ if (!window._adpCrossDomainTargets) {
         'cross-c-5a991.firebaseapp.com',
         'cross-d-423dc.firebaseapp.com',
     ];
-}
-
-if (!window._adpCrossDomainKey) {
-    window._adpCrossDomainKey = '_adp_cd_id';
-    window._adpCookieKey = '_adp_uid';
 }
 
 if (!window._adpLinker) {
@@ -112,9 +115,3 @@ if (!window._adpLinker) {
         element.content = timeout + ';' + newUrl;
     });
 })();
-
-// (function () {
-//     window.addEventListener('beforeunload', function (event) {
-//         event.returnValue = true;
-//     });
-// })();

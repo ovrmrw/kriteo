@@ -1,7 +1,11 @@
 if (!window._adpCrossDomainKey) {
     window._adpCrossDomainKey = '_adp_cd_id';
+}
+
+if (!window._adpCookieKey) {
     window._adpCookieKey = '_adp_uid';
 }
+
 
 (function () {
     var queryKey = window._adpCrossDomainKey;
